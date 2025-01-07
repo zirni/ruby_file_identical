@@ -1,9 +1,3 @@
-require 'bundler/inline'
-
-gemfile do
-  gem 'rspec'
-end
-
 def should_not_be_identical(a, b)
   describe a do
    it "should not be identical with #{b}" do
