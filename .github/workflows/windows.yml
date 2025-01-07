@@ -97,6 +97,6 @@ jobs:
           windows-toolchain: none
       - name: Run tests
         run: |
-          dir /s /b /o:gn
+          dir /s /b
           bundle install
           bundle exec rspec scratch.rb
