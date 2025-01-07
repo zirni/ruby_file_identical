@@ -37,4 +37,4 @@ jobs:
     - name: Run tests
       run: |
         bundle install
-        bundle exec scratch.rb
+        bundle exec rspec scratch.rb
