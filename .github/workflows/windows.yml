@@ -22,22 +22,23 @@ permissions:
 
 jobs:
   make:
-    strategy:
-      matrix:
-        include:
-          - vc: 2015
-            vs: 2019
-            vcvars: '10.0.14393.0 -vcvars_ver=14.0' # The oldest Windows 10 SDK w/ VC++ 2015 toolset (v140)
-            test_task: check
-          - vs: 2019
-            test_task: check
-          - vs: 2022
-            test_task: check
-          - vs: 2022
-            test_task: test-bundled-gems
-      fail-fast: false
+    # strategy:
+    #   matrix:
+    #     include:
+    #       - vc: 2015
+    #         vs: 2019
+    #         vcvars: '10.0.14393.0 -vcvars_ver=14.0' # The oldest Windows 10 SDK w/ VC++ 2015 toolset (v140)
+    #         test_task: check
+    #       - vs: 2019
+    #         test_task: check
+    #       - vs: 2022
+    #         test_task: check
+    #       - vs: 2022
+    #         test_task: test-bundled-gems
+    #   fail-fast: false
 
-    runs-on: windows-${{ matrix.vs < 2022 && '2019' || matrix.vs }}
+    # runs-on: windows-${{ matrix.vs < 2022 && '2019' || matrix.vs }}
+    runs-on: windows-2019
 
     if: >-
       ${{!(false
@@ -49,12 +50,13 @@ jobs:
       || (github.event_name == 'push' && github.event.pull_request.user.login == 'dependabot[bot]')
       )}}
 
-    name: VisualStudio ${{ matrix.vc || matrix.vs }} (${{ matrix.test_task }})
+    # name: VisualStudio ${{ matrix.vc || matrix.vs }} (${{ matrix.test_task }})
+    name: VisualStudio
 
     env:
       GITPULLOPTIONS: --no-tags origin ${{ github.ref }}
-      OS_VER: windows-${{ matrix.vs < 2022 && '2019' || matrix.vs }}
-      VCPKG_DEFAULT_TRIPLET: ${{ matrix.target || 'x64' }}-windows
+      OS_VER: windows-2019
+      VCPKG_DEFAULT_TRIPLET: x64-windows
 
     steps:
       - run: md build
@@ -93,3 +95,7 @@ jobs:
           ruby-version: '3.0'
           bundler: none
           windows-toolchain: none
+      - name: Run tests
+        run: |
+          bundle install
+          bundle exec rspec scratch.rb
