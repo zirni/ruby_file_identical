@@ -18,6 +18,7 @@ end
 # puts res.inspect
 
 RSpec.describe do
-  should_not_be_identical("IDENTICAL.TXT", "identical.txt")
-  should_be_identical("identical.txt", "identical.txt")
+  # should_not_be_identical("IDENTICAL.TXT", "identical.txt")
+  should_not_be_identical("2025-01-01_IKEA.pdf", "2025-01-01_ikea.pdf")
+  # should_be_identical("identical.txt", "identical.txt")
 end
