@@ -1,18 +1,14 @@
 def should_not_be_identical(a, b)
-  describe a do
-   it "should not be identical with #{b}" do
-     res = File.identical?(a, b)
-     expect(res).to be false
-   end
+  it "#{a} != #{b}" do
+    res = File.identical?(a, b)
+    expect(res).to be false
   end
 end
 
 def should_be_identical(a, b)
-  describe a do
-   it "should be identical with #{b}" do
-     res = File.identical?(a, b)
-     expect(res).to be true
-   end
+  it "#{a} == #{b}" do
+    res = File.identical?(a, b)
+    expect(res).to be true
   end
 end
 
