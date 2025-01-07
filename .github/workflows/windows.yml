@@ -98,5 +98,6 @@ jobs:
       - name: Run tests
         run: |
           dir
+          cd build
           bundle install
           bundle exec rspec scratch.rb
