@@ -62,25 +62,25 @@ jobs:
       - run: md build
         working-directory:
 
-      - name: find tools
-        id: find-tools
-        run: |
-          ::- find needed tools
-          set NEEDS=
-          for %%I in (%NEEDED_TOOLS%) do if "%%~$PATH:I" == "" (
-            call set NEEDS=%%NEEDS%% %%~nI
-          ) else (
-            echo %%I: %%~$PATH:I
-          )
-          echo.needs=%NEEDS%>>%GITHUB_OUTPUT%
-          if "%NEEDS%" == "" (
-            echo [debug] All needed tools found
-          ) else (
-            echo [warning^]Needs%NEEDS%
-          )
-        env:
-          NEEDED_TOOLS: >-
-            patch.exe
+    #   - name: find tools
+    #     id: find-tools
+    #     run: |
+    #       ::- find needed tools
+    #       set NEEDS=
+    #       for %%I in (%NEEDED_TOOLS%) do if "%%~$PATH:I" == "" (
+    #         call set NEEDS=%%NEEDS%% %%~nI
+    #       ) else (
+    #         echo %%I: %%~$PATH:I
+    #       )
+    #       echo.needs=%NEEDS%>>%GITHUB_OUTPUT%
+    #       if "%NEEDS%" == "" (
+    #         echo [debug] All needed tools found
+    #       ) else (
+    #         echo [warning^]Needs%NEEDS%
+    #       )
+    #     env:
+    #       NEEDED_TOOLS: >-
+    #         patch.exe
 
       - uses: msys2/setup-msys2@d40200dc2db4c351366b048a9565ad82919e1c24 # v2
         id: setup-msys2
